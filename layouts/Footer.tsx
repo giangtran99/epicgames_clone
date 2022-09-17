@@ -1,13 +1,13 @@
 
-import type { NextPage } from 'next'
+import {FC} from 'react'
 
+interface FooterProps{
+}
 
-const Footer : NextPage = ()=>{
+const Footer : FC<FooterProps> = ({})=>{
+
     return <>
-    
-    <div>
-        This is footer
-    </div>
+
 
     </>
 }

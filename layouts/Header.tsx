@@ -1,13 +1,15 @@
 
-import type { NextPage } from 'next'
+import {FC} from 'react'
 
+interface HeaderProps{
+   
+}
 
-const Header : NextPage = ()=>{
+const Header : FC<HeaderProps> = ({})=>{
+
     return <>
-        <div>
-        This is header
 
-        </div>
+
     </>
 }
 
