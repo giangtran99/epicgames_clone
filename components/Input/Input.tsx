@@ -1,23 +1,46 @@
-import { FC, useRef } from 'react'
-import { Input as ChakraInput , InputProps as ChakraInputProps} from '@chakra-ui/react'
+import { FC, useRef, ReactNode, KeyboardEvent, useEffect, InputHTMLAttributes } from 'react'
+import { InputProps as ChakraInputProps, Input as ChakraInput, InputGroup, InputLeftElement, InputRightElement } from '@chakra-ui/react'
+import { PhoneIcon } from '@chakra-ui/icons'
 
+interface InputProps extends ChakraInputProps {
+    prefixIcon?: ReactNode,
+    suffixIcon?: ReactNode,
+    onPressEnter?(value: string | number): void
 
-
-
-interface InputProps extends ChakraInputProps{
-
-    
 }
 
 
-const Input: FC<InputProps> = ({...props}) => {
+
+const Input: FC<InputProps> = (({ prefixIcon, suffixIcon, onPressEnter, ...props }) => {
     const inputRef = useRef() as any
 
-    console.log("@@props",props)
+    const handleEnterInput = () => {
+        inputRef.current.addEventListener('keydown', (event: KeyboardEvent) => {
+            if (event.key === "Enter" && onPressEnter) onPressEnter(inputRef.current.value)
+        })
+    }
+    useEffect(() => {
+        if (inputRef.current) {
+            console.log("@@call")
+            handleEnterInput()
+        }
+    }, [inputRef.current])
+
     return <>
-        <ChakraInput {...props}/>
+        <InputGroup>
+            {prefixIcon && <InputLeftElement
+                pointerEvents='none'
+                children={prefixIcon}
+            />}
+            <ChakraInput {...props} ref={inputRef} />
+
+            {suffixIcon && <InputRightElement
+                pointerEvents='none'
+                children={suffixIcon}
+            />}
+        </InputGroup>
     </>
-}
+})
 
 
 export default Input

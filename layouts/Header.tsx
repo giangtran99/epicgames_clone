@@ -1,5 +1,5 @@
 
-import { FC } from 'react'
+import { FC ,DOMAttributes } from 'react'
 import Input from '../components/Input'
 import { InputLeftElement, InputGroup } from '@chakra-ui/react'
 import { PhoneIcon } from '@chakra-ui/icons'
@@ -17,14 +17,9 @@ const Header: FC<HeaderProps> = ({ }) => {
 
     ]
     return <>
-        <InputGroup>
-            <InputLeftElement
-                pointerEvents='none'
-                children={<PhoneIcon color='gray.300' />}
-            />
-            <Input type='tel' placeholder='Phone number' />
-        </InputGroup>
-
+        <Input onPressEnter={(value)=>{
+            console.log("@@my enter",value)
+        }} prefixIcon={<PhoneIcon />}/>
     </>
 }
 
