@@ -1,8 +1,9 @@
 
-import { FC ,DOMAttributes } from 'react'
-import Input from '../components/Input'
+import { FC, DOMAttributes } from 'react'
+import NavBar from '../components/NavBar'
 import { InputLeftElement, InputGroup } from '@chakra-ui/react'
 import { PhoneIcon } from '@chakra-ui/icons'
+import Head from 'next/head'
 
 interface HeaderProps {
 
@@ -17,9 +18,10 @@ const Header: FC<HeaderProps> = ({ }) => {
 
     ]
     return <>
-        <Input onPressEnter={(value)=>{
-            console.log("@@my enter",value)
-        }} prefixIcon={<PhoneIcon />}/>
+        {/* <header>
+            <NavBar highLightItemStyle={"hight-light-color"} navItems={navItems} />
+
+        </header> */}
     </>
 }
 

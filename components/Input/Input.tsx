@@ -1,44 +1,39 @@
-import { FC, useRef, ReactNode, KeyboardEvent, useEffect, InputHTMLAttributes } from 'react'
-import { InputProps as ChakraInputProps, Input as ChakraInput, InputGroup, InputLeftElement, InputRightElement } from '@chakra-ui/react'
-import { PhoneIcon } from '@chakra-ui/icons'
-
+import { ReactNode, KeyboardEvent } from 'react'
+import { forwardRef, InputProps as ChakraInputProps, Input as ChakraInput, InputGroup, InputLeftElement, InputRightElement } from '@chakra-ui/react'
 interface InputProps extends ChakraInputProps {
     prefixIcon?: ReactNode,
     suffixIcon?: ReactNode,
-    onPressEnter?(value: string | number): void
+    onPressEnter?(value?: string | number): void
 
 }
 
 
+const Input = forwardRef<InputProps, 'input'>(({ prefixIcon, suffixIcon, onPressEnter, ...restProps }, ref: any) => {
 
-const Input: FC<InputProps> = (({ prefixIcon, suffixIcon, onPressEnter, ...props }) => {
-    const inputRef = useRef() as any
-
-    const handleEnterInput = () => {
-        inputRef.current.addEventListener('keydown', (event: KeyboardEvent) => {
-            if (event.key === "Enter" && onPressEnter) onPressEnter(inputRef.current.value)
-        })
-    }
-    useEffect(() => {
-        if (inputRef.current) {
-            console.log("@@call")
-            handleEnterInput()
+    // const inputRef = useRef(null)
+    const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+        if (onPressEnter && e.key === 'Enter') {
+            onPressEnter(ref.current?.value)
+            if (ref.current?.value) ref.current.value = ""
         }
-    }, [inputRef.current])
+    };
 
+    // console.log("@@ref",ref?.current?.value)
     return <>
-        <InputGroup>
-            {prefixIcon && <InputLeftElement
-                pointerEvents='none'
-                children={prefixIcon}
-            />}
-            <ChakraInput {...props} ref={inputRef} />
+        <div >
+            <InputGroup>
+                {prefixIcon && <InputLeftElement
+                    pointerEvents='none'
+                    children={prefixIcon}
+                />}
+                <ChakraInput onKeyDown={handleKeyDown} {...restProps} ref={ref} />
+                {suffixIcon && <InputRightElement
+                    pointerEvents='none'
+                    children={suffixIcon}
+                />}
+            </InputGroup>
+        </div>
 
-            {suffixIcon && <InputRightElement
-                pointerEvents='none'
-                children={suffixIcon}
-            />}
-        </InputGroup>
     </>
 })
 
