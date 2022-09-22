@@ -5,7 +5,20 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      width: {
+        inherit: 'inherit'
+      },
+      height: {
+        inherit: 'inherit'
+      },
+      maxWidth: {
+        '4/5': '80%',
+      },
+      minWidth: {
+        '4/5': '80%',
+      }
+    },
   },
   plugins: [],
 }

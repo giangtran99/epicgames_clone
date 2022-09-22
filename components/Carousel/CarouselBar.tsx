@@ -11,7 +11,7 @@ interface CarouselBarProps {
 
 const CarouselBar: FC<CarouselBarProps> = ({ listItems }) => {
     return <>
-        <div >
+        <div>
             <Image
                 height={144}
                 width={144}
