@@ -6,8 +6,15 @@ module.exports = {
   ],
   theme: {
     extend: {
+      screens:{
+        'srn-1': '1271px',
+        'srn-2': '1168px',
+        'srn-3': '1137px',
+        'srn-4': '816px'
+        
+      },
       fontSize: {
-        'tiny': '.675rem'
+        'tiny': '.735rem'
       },
       width: {
         inherit: 'inherit'

@@ -13,8 +13,8 @@ const Discover: NextPage = () => {
     ]
 
     return <>
-        <div className='mx-[15%]'>
-            <CarouselBanner listItems={[1,2]} /> 
+        <div className='mx-[5%] srn-3:mx-[10%]'>
+            <CarouselBanner listItems={[1,2,3,4,5,6]} /> 
         </div>
     </>
 }
