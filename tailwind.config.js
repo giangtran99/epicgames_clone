@@ -6,6 +6,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontSize: {
+        'tiny': '.675rem'
+      },
       width: {
         inherit: 'inherit'
       },
