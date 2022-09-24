@@ -7,14 +7,14 @@ module.exports = {
   theme: {
     extend: {
       screens:{
-        'srn-1': '1271px',
-        'srn-2': '1168px',
-        'srn-3': '1137px',
-        'srn-4': '816px'
+        'bp-1': {"max":'1137px'},
+        'bp-2':{"max":'903px'},
+        'bp-3':{"max":'961px'},
+        'mobile':{"max":'841px'}
         
       },
       fontSize: {
-        'tiny': '.735rem'
+        'tiny': '.755rem'
       },
       width: {
         inherit: 'inherit'
