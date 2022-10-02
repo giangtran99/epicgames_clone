@@ -35,7 +35,7 @@ const NavBar: FC<NavBarProps> = ({ navItems, highLightItemStyle, ...props }) => 
             {navItems.map((item: NavItemType, index: number) => {
                 return <li key={index} className={`ml-8 hover:${currentNavItemStyles(highLightItemStyle, true)} ${currentNavItemStyles(highLightItemStyle, item.url === router.pathname)}`}>
                     <Link href={item.url}>
-                        <span className='text-black'>{item.name}</span>
+                        <p className=''>{item.name}</p>
                     </Link>
                 </li>
             })}

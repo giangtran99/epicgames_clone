@@ -4,4 +4,6 @@
 @tailwind variants;
 
 
-
+.a{
+    background-color: aliceblue;
+}

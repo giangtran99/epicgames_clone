@@ -18,11 +18,18 @@ const Header: FC<HeaderProps> = ({ }) => {
 
     ]
     return <>
-        <header className='bp-1:mx-[5%] py-10 mx-[10%] flex flex-row'>
+        <header style={{padding:"20px 0"}} className='bp-1:mx-[5%] mx-[10%] flex flex-row'>
             <div>
                 <InputGroup>
                     <InputLeftElement children={<SearchIcon />} />
-                    <Input className='rounded-lg'/>
+                    <Input sx={{
+                        // "backgroundColor":"gray.50",
+                        // "opacity":"0.1",
+                        "borderRadius":"20px",
+                        // "placeHoder":"white"
+                    }} 
+                    placeholder="Search store"
+                    />
                 </InputGroup>
             </div>
             <div className='my-auto'>
