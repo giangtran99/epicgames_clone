@@ -8,7 +8,7 @@ module.exports = {
     extend: {
       keyframes: {
         slide: {
-          '0%': {  transform: 'translateX(30px)', opacity: 0 },
+          '0%': {  transform: 'translateX(10px)', opacity: 0 },
           '10%,100%': { transform: 'translateX(0)', opacity: 1},
         },
         progress_loading: {

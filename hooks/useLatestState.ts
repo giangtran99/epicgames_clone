@@ -3,9 +3,9 @@
 
 
 
-const useLatestState = (setState)=>{
+const useLatestState = (setState:any):Promise<any>=>{
     return new Promise((resolve)=>{
-        setState(latestState=>{
+        setState((latestState:any)=>{
             resolve(latestState)
             return latestState
         })

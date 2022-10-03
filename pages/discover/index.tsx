@@ -3,7 +3,7 @@ import type { NextPage } from 'next'
 import Input from '../../components/Input'
 import { SearchIcon } from '@chakra-ui/icons'
 import { useRef } from 'react'
-import { CarouselBanner } from '../../components/Carousel'
+import { CarouselBanner, CarouselBar } from '../../components/Carousel'
 
 
 const Discover: NextPage = () => {
@@ -11,9 +11,9 @@ const Discover: NextPage = () => {
     const games: any = [
         {
             "id":1,
-            "name":"Fall guys",
-            "imageUrl":"/images/sliderItem/Input.jpeg",
-            "thumbnailUrl":"/images/thumbnail/egs-fall-guys-s2-carousel-thumb-315x399-db76b5000c88.jpeg",
+            "name":"Saints Row",
+            "imageUrl":"/images/sliderItem/egs-saints-row-launch-carousel-desktop-1280x702-e2b42d436367.jpeg",
+            "thumbnailUrl":"/images/thumbnail/egs-saints-row-launch-carousel-mobile-1200x1600-1a95929f3bf9.jpeg",
             "description":"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
             "price":1000,
             "nameAlias":"fall-guys"
@@ -67,7 +67,7 @@ const Discover: NextPage = () => {
 
     return <>
         <div  className='bp-1:mx-[5%] mx-[10%]'>
-            <CarouselBanner listItems={games} /> 
+            <CarouselBar listItems={games} /> 
         </div>
     </>
 }

@@ -1,5 +1,4 @@
 import { FC, useEffect, useState } from 'react'
-import Document from 'next/document'
 import useLatestState from '../../hooks/useLatestState'
 import { AddIcon } from '@chakra-ui/icons'
 
@@ -48,7 +47,7 @@ const CarouselBanner: FC<CarouselBannerProps> = ({ listItems }) => {
             if (nextCurrentItem > listItems.length) { nextCurrentItem = 1 }
             slideItem(nextCurrentItem)
             setProgressAnimation("animate-progress_loading")
-        }, 9999999)
+        }, 4000)
         return () => clearInterval(id)
         // loopSlider()
     }, [])
@@ -77,7 +76,7 @@ const CarouselBanner: FC<CarouselBannerProps> = ({ listItems }) => {
                 return <>
 
                     <div key={item.id} id={item.id} className={`relative h-full basis-5/6 mobile:basis-full animate-slide ${isCurrentItem(item.id) ? "" : "hidden"}`}>
-                        <div className={`absolute bottom-0 p-10 w-[40%]`}>
+                        <div className={`absolute bottom-0 p-10 w-[40%] mobile:w-[90%] mobile:hidden`}>
                             <h1 className='text-xl antialiased leading-4 font-black'>{item.name}</h1>
                             <h1 className='antialiased mt-5'>{getElipsisString(item.description)}</h1>
                             <p className='mt-5'>Starting at <span className='font-semibold'>{item.price}$</span></p>
