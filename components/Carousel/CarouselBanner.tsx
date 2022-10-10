@@ -119,7 +119,6 @@ const CarouselBanner: FC<CarouselBannerProps> = ({ listItems }) => {
                                 <div className='ml-3 m-auto basis-2/4'>
                                     <span className='text-sm'>{item.name.length > 20 ? `${item.name.split(" ")[0]} ${item.name.split(" ")[1]}...` : item.name}</span>
                                 </div>
-
                             </div>
                         </div>
 

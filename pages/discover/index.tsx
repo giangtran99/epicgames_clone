@@ -67,7 +67,7 @@ const Discover: NextPage = () => {
 
     return <>
         <div  className='bp-1:mx-[5%] mx-[10%]'>
-            <CarouselBar listItems={games} /> 
+            <CarouselBar listItems={games} title='Games on sale'/> 
         </div>
     </>
 }
