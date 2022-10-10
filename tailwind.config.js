@@ -7,6 +7,14 @@ module.exports = {
   theme: {
     extend: {
       keyframes: {
+        slideRight: {
+          '0%': {  transform: 'translateX(-100px)', opacity: 0 },
+          '10%,100%': { transform: 'translateX(0)', opacity: 1},
+        },
+        slideLeft: {
+          '0%': {  transform: 'translateX(30px)', opacity: 0 },
+          '10%,100%': { transform: 'translateX(0)', opacity: 1},
+        },
         slide: {
           '0%': {  transform: 'translateX(10px)', opacity: 0 },
           '10%,100%': { transform: 'translateX(0)', opacity: 1},
@@ -18,6 +26,8 @@ module.exports = {
       },
       animation: {
         slide: 'slide 3s cubic-bezier(0.455, 0.03, 0.515, 0.955)',
+        slideLeft: 'slideLeft 3s cubic-bezier(0.455, 0.03, 0.515, 0.955)',
+        slideRight: 'slideRight 3s cubic-bezier(0.455, 0.03, 0.515, 0.955)',
         progress_loading: 'progress_loading 4.0s linear'
       },
       screens:{
