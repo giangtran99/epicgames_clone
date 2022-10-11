@@ -1,4 +1,4 @@
-import { FC, useEffect, useRef, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 
 
 interface CarouselBarProps {
@@ -7,12 +7,9 @@ interface CarouselBarProps {
     title: string
 }
 
-
-
 const CarouselBar: FC<CarouselBarProps> = ({ listItems, title = "Game On Sales" }) => {
     const [stepRange, setStepRange] = useState(5)
     const [startPoint, setStartPoint] = useState(0)
-    console.log("@@listItems", listItems)
     const getFrameItem = (startPoint: number, stepRange: number) => {
         return [startPoint, startPoint + stepRange]
     }
@@ -22,21 +19,18 @@ const CarouselBar: FC<CarouselBarProps> = ({ listItems, title = "Game On Sales" 
         })
     }, [])
 
-    console.log("@@startPoint",startPoint)
+    console.log("@@startPoint", startPoint)
 
     const move = (action: "prev" | "next", startPoint: number, stepRange: number) => {
         const element = document.getElementsByClassName(`${startPoint}`)
         switch (action) {
             case "prev":
-                startPoint < stepRange ? setStartPoint(startPoint - 1 ) : setStartPoint(startPoint - stepRange)
+                startPoint < stepRange ? setStartPoint(startPoint - 1) : setStartPoint(startPoint - stepRange)
                 return
             case "next":
                 const countRestItem = listItems.length - (startPoint + stepRange)
                 console.log("@@countRestItem", countRestItem)
                 countRestItem < stepRange ? setStartPoint(listItems.length - stepRange) : setStartPoint(startPoint + stepRange)
-                // element.classList.remove("animate-slideRight");
-                
-
                 return
             default:
                 return
@@ -73,7 +67,6 @@ const CarouselBar: FC<CarouselBarProps> = ({ listItems, title = "Game On Sales" 
                 </>
             })}
         </div>
-
     </>
 }
 

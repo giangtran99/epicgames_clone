@@ -74,7 +74,6 @@ const CarouselBanner: FC<CarouselBannerProps> = ({ listItems }) => {
 
             {listItems.map((item) => {
                 return <>
-
                     <div key={item.id} id={item.id} className={`relative h-full basis-5/6 mobile:basis-full animate-slide ${isCurrentItem(item.id) ? "" : "hidden"}`}>
                         <div className={`absolute bottom-0 p-10 w-[40%] mobile:w-[90%] mobile:hidden`}>
                             <h1 className='text-xl antialiased leading-4 font-black'>{item.name}</h1>
@@ -84,11 +83,10 @@ const CarouselBanner: FC<CarouselBannerProps> = ({ listItems }) => {
                                 <a className='bg-white border text-black rounded p-3 basis-1/2 text-center' href={`/${item.nameAlias}`}>BUY NOW</a>
                                 <button className='rounded ml-3 basis-1/2 hover:border hover:bg-[rgba(192,192,192,0.3)] p-2 text-white text-[10px]'>
                                     <div className='flex flex-row'>
-                                    <AddIcon boxSize={"2em"} className='border border-white border-[2px] rounded-full p-1 '/>
-                                  <span className='my-auto ml-2 basis-3/4'>  ADD TO WISHLIST</span>
+                                        <AddIcon boxSize={"2em"} className='border border-white border-[2px] rounded-full p-1 ' />
+                                        <span className='my-auto ml-2 basis-3/4'>  ADD TO WISHLIST</span>
                                     </div>
-                                
-                                    </button>
+                                </button>
                             </div>
                         </div>
                         <div>
@@ -105,7 +103,6 @@ const CarouselBanner: FC<CarouselBannerProps> = ({ listItems }) => {
 
 
             <div className={`basis-1/6 flex flex-col justify-between mobile:hidden gap-y-2`}>
-
                 {listItems.map((item) => {
                     return <>
                         <div key={item.id} className={`h-[16%] relative`} onClick={() => slideItem(item.id)}>
