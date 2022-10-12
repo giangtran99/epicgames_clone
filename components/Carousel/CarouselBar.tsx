@@ -10,6 +10,8 @@ interface CarouselBarProps {
 const CarouselBar: FC<CarouselBarProps> = ({ listItems, title = "Game On Sales" }) => {
     const [stepRange, setStepRange] = useState(5)
     const [startPoint, setStartPoint] = useState(0)
+
+    console.log("@@listItems.length ",listItems.length )
     const getFrameItem = (startPoint: number, stepRange: number) => {
         return [startPoint, startPoint + stepRange]
     }
@@ -19,7 +21,6 @@ const CarouselBar: FC<CarouselBarProps> = ({ listItems, title = "Game On Sales" 
         })
     }, [])
 
-    console.log("@@startPoint", startPoint)
 
     const move = (action: "prev" | "next", startPoint: number, stepRange: number) => {
         const element = document.getElementsByClassName(`${startPoint}`)
@@ -29,7 +30,6 @@ const CarouselBar: FC<CarouselBarProps> = ({ listItems, title = "Game On Sales" 
                 return
             case "next":
                 const countRestItem = listItems.length - (startPoint + stepRange)
-                console.log("@@countRestItem", countRestItem)
                 countRestItem < stepRange ? setStartPoint(listItems.length - stepRange) : setStartPoint(startPoint + stepRange)
                 return
             default:
@@ -58,15 +58,23 @@ const CarouselBar: FC<CarouselBarProps> = ({ listItems, title = "Game On Sales" 
                 </svg>
             </div>
         </div>
-        <div className='flex flex-row flex-wrap gap-x-[1.5%] mt-3 place-content-between'>
-            {listItems.slice(getFrameItem(startPoint, stepRange)[0], getFrameItem(startPoint, stepRange)[1]).map((item: any) => {
-                return <>
-                    <div className={`basis-[18.5%] ${startPoint}`}>
-                        <img className='rounded' src={`${item.thumbnailUrl}`}></img>
-                    </div>
-                </>
-            })}
+        <div>
+            <div className='overflow-x-scroll bordered'>
+
+                <div className={`inline-flex mt-3 h-[300px] gap-x-7 `}>
+                    {listItems.map((item: any) => {
+                        return <>
+                            <div className={`w-[200px]`}>
+                                <img className='rounded' src={`${item.thumbnailUrl}`}></img>
+                            </div>
+                        </>
+                    })}
+                </div>
+          
+            </div>
         </div>
+
+
     </>
 }
 
