@@ -7,3 +7,7 @@
 .a{
     background-color: aliceblue;
 }
+
+#scroll-bar::-webkit-scrollbar{
+    display: none;
+}
