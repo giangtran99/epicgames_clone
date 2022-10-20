@@ -1,27 +1,41 @@
-import { FC, useEffect, useRef } from 'react'
-
+import { FC, useEffect, useRef, useState } from 'react'
+import { formatMoney, getElipsisString } from '../../heplers'
+import { Tag } from '@chakra-ui/react'
+import { ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons'
 
 interface CarouselBarProps {
     autoPlay?: boolean
     listItems: any[]
-    title: string
+    title: string,
 }
 
 const CarouselBar: FC<CarouselBarProps> = ({ listItems, title = "Game On Sales" }) => {
-    const itemsPerPage = 5;
+    const [itemsPerPage, setItemsPerPage] = useState(5)
     const numberOfPage = Math.ceil(listItems.length / itemsPerPage)
     const currentFrameRef = useRef(1)
 
-    const handleSrollBar = () => {
-    }
     useEffect(() => {
-        handleSrollBar()
+        window.addEventListener("resize", () => {
+            console.log("@@e", window.innerWidth)
+            const break_point_1 = 1000
+            const break_point_2 = 887
+            if (window.innerWidth > break_point_1) {
+                setItemsPerPage(5)
+            }
+            if (window.innerWidth < break_point_1 && window.innerWidth > break_point_2) {
+                setItemsPerPage(4)
+            }
+            if (window.innerWidth < break_point_2) {
+                setItemsPerPage(3)
+            }
+        });
+
     }, [])
 
     const Page = {
         skip: (currentPage: number) => {
             const numberOfRestItem = listItems.length % itemsPerPage
-            const numberOfRestItemsInLastPage = numberOfRestItem === 0 ? 5 : numberOfRestItem
+            const numberOfRestItemsInLastPage = numberOfRestItem === 0 ? itemsPerPage : numberOfRestItem
             if (currentPage === numberOfPage) return (currentPage * itemsPerPage) - (itemsPerPage - numberOfRestItemsInLastPage)
             return currentPage * itemsPerPage
         },
@@ -30,40 +44,58 @@ const CarouselBar: FC<CarouselBarProps> = ({ listItems, title = "Game On Sales" 
         }
     }
 
-    const slideNext = () =>{
-
-        document.getElementById("scroll-bar")?.scrollTo((currentFrameRef.current-1)*1152 + 1152, (currentFrameRef.current -1)*1152);
-        if(currentFrameRef.current < numberOfPage){
-            currentFrameRef.current+=1
+    const slideNext = () => {
+        const scrollBar = document.getElementById("scroll-bar")
+        const widthScrollBar = scrollBar?.offsetWidth || 0
+        scrollBar?.scrollTo((currentFrameRef.current - 1) * widthScrollBar + widthScrollBar, (currentFrameRef.current - 1) * widthScrollBar);
+        if (currentFrameRef.current < numberOfPage) {
+            currentFrameRef.current += 1
         }
 
-        console.log("@@currentFrameRef.current",currentFrameRef.current)
 
     }
 
-    const slidePrev = () =>{
-        document.getElementById("scroll-bar")?.scrollTo((currentFrameRef.current-2)*1152 , (currentFrameRef.current-1)*1152 + 1152);
-        console.log("@@ao",(currentFrameRef.current-1)*1152 + 1152)
-        if(currentFrameRef.current > 1){
-            currentFrameRef.current-=1
+    const slidePrev = () => {
+        const scrollBar = document.getElementById("scroll-bar")
+        const widthScrollBar = scrollBar?.offsetWidth || 0
+        scrollBar?.scrollTo((currentFrameRef.current - 2) * widthScrollBar, (currentFrameRef.current - 1) * widthScrollBar + widthScrollBar);
+        if (currentFrameRef.current > 1) {
+            currentFrameRef.current -= 1
         }
-        console.log("@@currentFrameRef.current",currentFrameRef.current)
 
     }
 
 
     const renderPagingListItem = () => {
+        const ratioPerItem = Math.ceil(92 / itemsPerPage)
         return <>
             {Array(numberOfPage).fill(null).map((value, currentPage) => {
                 let end = Page.skip(currentPage + 1)
                 let start = Page.skip(currentPage + 1) - Page.limit()
                 return (<>
-                    <div key={currentPage + 1} className='inline-block gap-x-3'>
+                    <div key={currentPage + 1} className={`inline-block ${currentPage === 1 ? "" : "mr-3"}`}>
                         <div className={`flex flex-wrap mt-3 justify-between`}>
                             {listItems.slice(start, end).map((item: any) => {
                                 return <>
-                                    <div key={item.id} className={`basis-[19%]`}>
-                                        <img className='rounded' src={`${item.thumbnailUrl}`}></img>
+                                    <div key={item.id} style={{ flexBasis: `${ratioPerItem}%` }}>
+                                        <div className='basis-3/4'>
+                                            <img className='rounded' src={`${item.thumbnailUrl}`}></img>
+                                        </div>
+                                        <div className='mt-3 basis-1/4'>
+                                            <p className='text-[10px] text-slate-300 '>BASE GAME</p>
+                                            <p className='text-base'>{getElipsisString(item.name, 34)}</p>
+                                            <div className='flex flex-row mt-2'>
+                                                <Tag className='px-6 h-[100%] m-auto py-1 basis-1/4' size={"sm"} key={3} variant='solid' colorScheme='teal'>
+                                                    -50%
+                                                </Tag>
+                                                <div className='basis-3/4'>
+                                                    <div className='float-right p-auto'>
+                                                        <p className='text-sm line-through'>{`${formatMoney(item.price)}`}</p>
+                                                        <p className='text-sm'>{`${formatMoney(item.price / 2)}`}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </>
                             })}
@@ -76,31 +108,20 @@ const CarouselBar: FC<CarouselBarProps> = ({ listItems, title = "Game On Sales" 
 
     return <>
         <div className='flex flex-row place-content-between'>
-            <div className='flex items-center'>
+            <div className='flex items-center gap-x-1'>
                 <h2 className='leading-[8px] text-lg font-medium'>{title}</h2>
+                <ChevronRightIcon width={3} height={3} className="" />
+
             </div>
             <div className='flex flex-row'>
+                <ChevronLeftIcon width={6} height={6} onClick={slidePrev} className="rounded-full bg-gray-700 mr-2 border-2 w-[28px] h-[28px]" />
+                <ChevronRightIcon width={6} height={6} onClick={slideNext} className="rounded-full bg-gray-700 border-2 w-[28px] h-[28px]" />
 
-                <svg viewBox="0 0 24 24" focusable="false" className="rounded-full bg-gray-700 mr-2 border-2 w-[28px] h-[28px]"
-                    onClick={slidePrev}
-                >
-                    <path fill="currentColor" d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z">
-                    </path>
-                </svg>
-                <svg viewBox="0 0 24 24" focusable="false" className="rounded-full bg-gray-700 border-2 w-[28px] h-[28px]"
-                onClick={slideNext}
-                >
-                    <path fill="currentColor" d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z">
-                    </path>
-                </svg>
             </div>
         </div>
         <div>
             <div id="scroll-bar" className='scroll-smooth overflow-x-scroll bordered whitespace-nowrap gap-x-10'>
-
                 {renderPagingListItem()}
-
-
                 {/* <div className='inline-block'>
                     <div className={`flex flex-wrap mt-3 justify-between`}>
                         {listItems.slice(0, 5).map((item: any) => {

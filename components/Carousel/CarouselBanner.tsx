@@ -1,7 +1,7 @@
 import { FC, useEffect, useState } from 'react'
 import useLatestState from '../../hooks/useLatestState'
 import { AddIcon } from '@chakra-ui/icons'
-
+import {getElipsisString} from '../../heplers'
 
 interface CarouselBannerProps {
     autoPlay?: boolean
@@ -55,13 +55,7 @@ const CarouselBanner: FC<CarouselBannerProps> = ({ listItems }) => {
         return id === currentItem ? true : false
     }
 
-    const getElipsisString = (description: string,maxLength:number) => {
-        //trim the string to the maximum length
-        let trimmedString = description.substr(0, maxLength);
-        //re-trim if we are in the middle of a word
-        trimmedString = trimmedString.substr(0, Math.min(trimmedString.length, trimmedString.lastIndexOf(" ")))
-        return `${trimmedString} ...`
-    }
+
     return <>
         <div className='flex flex-row gap-x-4'>
 
@@ -107,7 +101,7 @@ const CarouselBanner: FC<CarouselBannerProps> = ({ listItems }) => {
                                     <img className='bp-3:rounded rounded-lg' src={`${item.thumbnailUrl}`} />
                                 </div>
                                 <div className='ml-3 m-auto basis-2/4'>
-                                    <span className='text-sm'>{getElipsisString(item.name,5)}</span>
+                                    <span className='text-sm'>{getElipsisString(item.name,100)}</span>
                                 </div>
                             </div>
                         </div>
