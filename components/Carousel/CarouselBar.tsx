@@ -15,8 +15,17 @@ const CarouselBar: FC<CarouselBarProps> = ({ listItems, title = "Game On Sales" 
     const currentFrameRef = useRef(1)
 
     useEffect(() => {
+
+        onResize()
+
+    }, [])
+
+
+
+    const onResize = ()=>{
+        const scrollBar = document.getElementById("scroll-bar")
+        scrollBar?.addEventListener("wheel",(e)=>e.preventDefault(),{passive:false})
         window.addEventListener("resize", () => {
-            console.log("@@e", window.innerWidth)
             const break_point_1 = 1000
             const break_point_2 = 887
             if (window.innerWidth > break_point_1) {
@@ -29,8 +38,7 @@ const CarouselBar: FC<CarouselBarProps> = ({ listItems, title = "Game On Sales" 
                 setItemsPerPage(3)
             }
         });
-
-    }, [])
+    }
 
     const Page = {
         skip: (currentPage: number) => {
@@ -51,8 +59,6 @@ const CarouselBar: FC<CarouselBarProps> = ({ listItems, title = "Game On Sales" 
         if (currentFrameRef.current < numberOfPage) {
             currentFrameRef.current += 1
         }
-
-
     }
 
     const slidePrev = () => {
@@ -67,13 +73,13 @@ const CarouselBar: FC<CarouselBarProps> = ({ listItems, title = "Game On Sales" 
 
 
     const renderPagingListItem = () => {
-        const ratioPerItem = Math.ceil(92 / itemsPerPage)
+        const ratioPerItem = Math.ceil(90 / itemsPerPage)
         return <>
             {Array(numberOfPage).fill(null).map((value, currentPage) => {
                 let end = Page.skip(currentPage + 1)
                 let start = Page.skip(currentPage + 1) - Page.limit()
                 return (<>
-                    <div key={currentPage + 1} className={`inline-block ${currentPage === 1 ? "" : "mr-3"}`}>
+                    <div key={currentPage + 1} className={`inline-block ${currentPage === 1 ? "" : ""}`}>
                         <div className={`flex flex-wrap mt-3 justify-between`}>
                             {listItems.slice(start, end).map((item: any) => {
                                 return <>
@@ -107,7 +113,7 @@ const CarouselBar: FC<CarouselBarProps> = ({ listItems, title = "Game On Sales" 
     }
 
     return <>
-        <div className='flex flex-row place-content-between'>
+        <div className='flex flex-row place-content-between mt-5'>
             <div className='flex items-center gap-x-1'>
                 <h2 className='leading-[8px] text-lg font-medium'>{title}</h2>
                 <ChevronRightIcon width={3} height={3} className="" />
