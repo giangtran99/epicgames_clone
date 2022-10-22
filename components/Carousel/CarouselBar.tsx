@@ -126,7 +126,7 @@ const CarouselBar: FC<CarouselBarProps> = ({ listItems, title = "Game On Sales" 
             </div>
         </div>
         <div>
-            <div id="scroll-bar" className='scroll-smooth overflow-x-scroll bordered whitespace-nowrap gap-x-10'>
+            <div id="scroll-bar" className='pointer-events-none	scroll-smooth overflow-x-scroll bordered whitespace-nowrap gap-x-10'>
                 {renderPagingListItem()}
                 {/* <div className='inline-block'>
                     <div className={`flex flex-wrap mt-3 justify-between`}>

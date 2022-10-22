@@ -68,10 +68,9 @@ const Discover: NextPage = () => {
     ]
 
     return <>
-        <div className='bp-1:mx-[5%] mx-[10%]'>
+        <div className='bp-1:mx-[5%] mx-[12%]'>
             <CarouselBanner listItems={games} />
-            <Center height='50px'>
-                <Divider orientation='horizontal' />
+            <Center height='30px'>
             </Center>
             <CarouselBar listItems={games} title='Games On Sale' />
         </div>

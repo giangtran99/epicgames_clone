@@ -18,7 +18,7 @@ const Header: FC<HeaderProps> = ({ }) => {
 
     ]
     return <>
-        <header style={{padding:"20px 0"}} className='bp-1:mx-[5%] mx-[10%] flex flex-row'>
+        <header style={{padding:"20px 0"}} className='bp-1:mx-[5%] mx-[12%] flex flex-row'>
             <div>
                 <InputGroup>
                     <InputLeftElement children={<SearchIcon />} />
