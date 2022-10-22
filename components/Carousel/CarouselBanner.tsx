@@ -18,7 +18,6 @@ const CarouselBanner: FC<CarouselBannerProps> = ({ listItems }) => {
         setCurrentItem(id)
         // document.getElementById(`progress-bar-${id.toString()}`)!.className += "animate-progress_loading"
 
-
     }
 
     // const loopSlider = async () => {
@@ -45,7 +44,7 @@ const CarouselBanner: FC<CarouselBannerProps> = ({ listItems }) => {
             if (nextCurrentItem > listItems.length) { nextCurrentItem = 1 }
             slideItem(nextCurrentItem)
             setProgressAnimation("animate-progress_loading")
-        }, 4000)
+        }, 99999)
         return () => clearInterval(id)
         // loopSlider()
     }, [])
@@ -70,8 +69,8 @@ const CarouselBanner: FC<CarouselBannerProps> = ({ listItems }) => {
                                 <a className='bg-white border text-black rounded p-3 basis-1/2 text-center' href={`/${item.nameAlias}`}>BUY NOW</a>
                                 <button className='rounded ml-3 basis-1/2 hover:border hover:bg-[rgba(192,192,192,0.3)] p-2 text-white text-[10px]'>
                                     <div className='flex flex-row'>
-                                        <AddIcon boxSize={"2em"} className='border border-white border-[2px] rounded-full p-1 ' />
-                                        <span className='my-auto ml-2 basis-3/4'>  ADD TO WISHLIST</span>
+                                        <AddIcon boxSize={"2em"} className='m-auto border-white border-[2px] rounded-full p-1 '/>
+                                        <span className='my-auto ml-2 basis-3/4'>ADD TO WISHLIST</span>
                                     </div>
                                 </button>
                             </div>
@@ -93,7 +92,7 @@ const CarouselBanner: FC<CarouselBannerProps> = ({ listItems }) => {
                 {listItems.map((item) => {
                     return <>
                         <div key={item.id} className={`h-[16%] relative`} onClick={() => slideItem(item.id)}>
-                            <div key={item.id} id={`progress-bar-${item.id}`} className={`${progressAnimation} absolute rounded-l-xl h-[100%] ${isCurrentItem(item.id) ? `bg-[rgba(192,192,192,0.3)] ` : ""}`}>
+                            <div key={item.id} id={`progress-bar-${item.id}`} className={`absolute rounded-l-xl h-[100%] ${isCurrentItem(item.id) ? `bg-[rgba(192,192,192,0.3)] ` : ""}`}>
 
                             </div>
                             <div className={`hover:bg-[rgba(0,0,0,0.5)] ${isCurrentItem(item.id) ? "bg-[rgba(0,0,0,0.5)]" : ""} rounded-xl bp-2:rounded-lg h-[100%] flex flex-row my-auto`}>

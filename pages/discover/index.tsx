@@ -64,7 +64,6 @@ const Discover: NextPage = () => {
             "nameAlias": "a-plague-tale-requiem"
         },
 
-
     ]
 
     return <>
@@ -73,6 +72,8 @@ const Discover: NextPage = () => {
             <Center height='30px'>
             </Center>
             <CarouselBar listItems={games} title='Games On Sale' />
+            <Center height='30px'>
+            </Center>
         </div>
     </>
 }
