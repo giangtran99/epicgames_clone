@@ -1,8 +1,8 @@
 import { ReactNode, KeyboardEvent } from 'react'
-import { forwardRef, InputProps as ChakraInputProps, Input as ChakraInput, InputGroup, InputLeftElement, InputRightElement } from '@chakra-ui/react'
+import { InputProps as ChakraInputProps, Input as ChakraInput } from '@chakra-ui/Input'
+import { forwardRef } from '@chakra-ui/react'
 interface InputProps extends ChakraInputProps {
     onPressEnter?(value?: string | number): void
-
 }
 
 

@@ -63,12 +63,48 @@ const Discover: NextPage = () => {
             "price": 1000,
             "nameAlias": "a-plague-tale-requiem"
         },
+        {
+            "id": 7,
+            "name": "A Plague Tale: Requiem 2",
+            "imageUrl": "/images/sliderItem/egs-a-plague-tale-requiem-carousel-desktop-1248x702-25022231be7c.jpeg",
+            "thumbnailUrl": "/images/thumbnail/egs-a-plague-tale-requiem-carousel-thumb-1200x1600-4a718450aabc.jpeg",
+            "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+            "price": 1000,
+            "nameAlias": "a-plague-tale-requiem-2"
+        },
+        {
+            "id": 8,
+            "name": "A Plague Tale: Requiem 2",
+            "imageUrl": "/images/sliderItem/egs-a-plague-tale-requiem-carousel-desktop-1248x702-25022231be7c.jpeg",
+            "thumbnailUrl": "/images/thumbnail/egs-a-plague-tale-requiem-carousel-thumb-1200x1600-4a718450aabc.jpeg",
+            "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+            "price": 1000,
+            "nameAlias": "a-plague-tale-requiem-2"
+        },
+        {
+            "id": 9,
+            "name": "A Plague Tale: Requiem 2",
+            "imageUrl": "/images/sliderItem/egs-a-plague-tale-requiem-carousel-desktop-1248x702-25022231be7c.jpeg",
+            "thumbnailUrl": "/images/thumbnail/egs-a-plague-tale-requiem-carousel-thumb-1200x1600-4a718450aabc.jpeg",
+            "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+            "price": 1000,
+            "nameAlias": "a-plague-tale-requiem-2"
+        },
+        {
+            "id": 10,
+            "name": "A Plague Tale: Requiem 2",
+            "imageUrl": "/images/sliderItem/egs-a-plague-tale-requiem-carousel-desktop-1248x702-25022231be7c.jpeg",
+            "thumbnailUrl": "/images/thumbnail/egs-a-plague-tale-requiem-carousel-thumb-1200x1600-4a718450aabc.jpeg",
+            "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+            "price": 1000,
+            "nameAlias": "a-plague-tale-requiem-2"
+        },
 
     ]
 
     return <>
         <div className='bp-1:mx-[5%] mx-[12%]'>
-            <CarouselBanner listItems={games} />
+            <CarouselBanner listItems={games.slice(0,5)} />
             <Center height='30px'>
             </Center>
             <CarouselBar listItems={games} title='Games On Sale' />

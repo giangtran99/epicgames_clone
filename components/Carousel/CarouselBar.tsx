@@ -1,6 +1,6 @@
 import { FC, useEffect, useRef, useState } from 'react'
 import { formatMoney, getElipsisString } from '../../heplers'
-import { Tag } from '@chakra-ui/react'
+import { Tag } from '@chakra-ui/tag'
 import { ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons'
 
 interface CarouselBarProps {
@@ -15,23 +15,21 @@ const CarouselBar: FC<CarouselBarProps> = ({ listItems, title = "Game On Sales" 
     const currentFrameRef = useRef(1)
 
     useEffect(() => {
-
         onResize()
-
     }, [])
 
 
 
-    const onResize = ()=>{
+    const onResize = () => {
         const scrollBar = document.getElementById("scroll-bar")
-        scrollBar?.addEventListener("wheel",(e)=>e.preventDefault(),{passive:false})
+        scrollBar?.addEventListener("wheel", (e) => e.preventDefault(), { passive: false })
         window.addEventListener("resize", () => {
             const break_point_1 = 1000
             const break_point_2 = 887
             if (window.innerWidth > break_point_1) {
                 setItemsPerPage(5)
             }
-            if (window.innerWidth < break_point_1 && window.innerWidth > break_point_2) {
+            if (window.innerWidth <= break_point_1 && window.innerWidth >= break_point_2) {
                 setItemsPerPage(4)
             }
             if (window.innerWidth < break_point_2) {
@@ -40,23 +38,18 @@ const CarouselBar: FC<CarouselBarProps> = ({ listItems, title = "Game On Sales" 
         });
     }
 
-    const Page = {
-        skip: (currentPage: number) => {
-            const numberOfRestItem = listItems.length % itemsPerPage
-            const numberOfRestItemsInLastPage = numberOfRestItem === 0 ? itemsPerPage : numberOfRestItem
-            if (currentPage === numberOfPage) return (currentPage * itemsPerPage) - (itemsPerPage - numberOfRestItemsInLastPage)
-            return currentPage * itemsPerPage
-        },
-        limit: () => {
-            return itemsPerPage
-        }
-    }
-
     const slideNext = () => {
+        const numberOfRestItem = (listItems.length % itemsPerPage)
+        const numberOfRestItemsInLastPage = numberOfRestItem === 0 ? itemsPerPage : numberOfRestItem
         const scrollBar = document.getElementById("scroll-bar")
-        const widthScrollBar = scrollBar?.offsetWidth || 0
-        scrollBar?.scrollTo((currentFrameRef.current - 1) * widthScrollBar + widthScrollBar, (currentFrameRef.current - 1) * widthScrollBar);
-        if (currentFrameRef.current < numberOfPage) {
+        const widthScrollBar = (103 / 100) * (scrollBar?.offsetWidth || 0)
+        if (currentFrameRef.current === numberOfPage - 1) {
+            scrollBar?.scrollTo(((currentFrameRef.current - 1) * widthScrollBar + ((widthScrollBar * numberOfRestItemsInLastPage / itemsPerPage))), 0);
+        }
+        else {
+            scrollBar?.scrollTo(((currentFrameRef.current - 1) * widthScrollBar + widthScrollBar), 0);
+        }
+        if (currentFrameRef.current < numberOfPage - 1) {
             currentFrameRef.current += 1
         }
     }
@@ -64,11 +57,10 @@ const CarouselBar: FC<CarouselBarProps> = ({ listItems, title = "Game On Sales" 
     const slidePrev = () => {
         const scrollBar = document.getElementById("scroll-bar")
         const widthScrollBar = scrollBar?.offsetWidth || 0
-        scrollBar?.scrollTo((currentFrameRef.current - 2) * widthScrollBar, (currentFrameRef.current - 1) * widthScrollBar + widthScrollBar);
+        scrollBar?.scrollTo((currentFrameRef.current - 2) * widthScrollBar, 0);
         if (currentFrameRef.current > 1) {
             currentFrameRef.current -= 1
         }
-
     }
 
 
@@ -76,11 +68,14 @@ const CarouselBar: FC<CarouselBarProps> = ({ listItems, title = "Game On Sales" 
         const ratioPerItem = Math.ceil(90 / itemsPerPage)
         return <>
             {Array(numberOfPage).fill(null).map((value, currentPage) => {
-                let end = Page.skip(currentPage + 1)
-                let start = Page.skip(currentPage + 1) - Page.limit()
+                let end = (currentPage + 1) * itemsPerPage
+                let start = (currentPage + 1) * itemsPerPage - itemsPerPage
+
+                const isFirstPage = currentPage + 1 === 1
+                const isEnoughtItemsPerPage = listItems.length % itemsPerPage === 0
                 return (<>
-                    <div key={currentPage + 1} className={`inline-block ${currentPage === 1 ? "" : ""}`}>
-                        <div className={`flex flex-wrap mt-3 justify-between`}>
+                    <div key={currentPage + 1} className={`inline-block w-full ${!isFirstPage? "ml-[2.3%]" : ""} `}>
+                        <div className={`flex flex-wrap mt-3  ${isEnoughtItemsPerPage || isFirstPage ? "justify-between" : "gap-x-[3%]"}`}>
                             {listItems.slice(start, end).map((item: any) => {
                                 return <>
                                     <div key={item.id} style={{ flexBasis: `${ratioPerItem}%` }}>
@@ -126,8 +121,9 @@ const CarouselBar: FC<CarouselBarProps> = ({ listItems, title = "Game On Sales" 
             </div>
         </div>
         <div>
-            <div id="scroll-bar" className='pointer-events-none	scroll-smooth overflow-x-scroll bordered whitespace-nowrap gap-x-10'>
-                {renderPagingListItem()}
+            <div id="scroll-bar" className='pointer-events-none scroll-smooth overflow-x-scroll bordered whitespace-nowrap'>
+                    {renderPagingListItem()}
+
                 {/* <div className='inline-block'>
                     <div className={`flex flex-wrap mt-3 justify-between`}>
                         {listItems.slice(0, 5).map((item: any) => {
@@ -146,7 +142,6 @@ const CarouselBar: FC<CarouselBarProps> = ({ listItems, title = "Game On Sales" 
                 {/* <div className='bg-white w-[1000px] h-[300px] inline-table'>
 
                 </div> */}
-
             </div>
         </div>
 
